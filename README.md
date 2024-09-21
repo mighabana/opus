@@ -1,3 +1,9 @@
+# About
+
+My personal website, nicknamed opus as I'd like to think its an artistic work at a large scale. :monocle_face:
+
+:warning: :construction_worker: - Still under construction...
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
