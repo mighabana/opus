@@ -265,12 +265,14 @@ export function SplitFlapDisplay({ content, cols, rows, onAnimationComplete, tag
                 />
               ))}
             </div>
-            <div 
-              className={`text-white/50 text-2xl flex items-center ${shouldShowArrow ? 'visible' : 'invisible'}`}
-              style={{ height: isMobile ? '2.25rem' : '3rem' }}
-            >
-              ↵
-            </div>
+            {shouldShowArrow && (
+              <div 
+                className="text-white/50 text-2xl flex items-center"
+                style={{ height: isMobile ? '2.25rem' : '3rem' }}
+              >
+                ↵
+              </div>
+            )}
           </div>
         );
       })}

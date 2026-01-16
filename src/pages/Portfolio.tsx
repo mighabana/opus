@@ -1,13 +1,233 @@
-import { Link } from "react-router-dom";
+import { PhotoGallery } from "../components/PhotoGallery";
+import { NavigationBar } from "../components/NavigationBar";
+import { BrowserRouter } from "react-router-dom";
+
+const mockPhotos = [
+  {
+    id: "1",
+    url: "https://images.unsplash.com/photo-1534218238612-bace67b05bf2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwxfHx8fDE3NjE0OTk3Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Misty Mountain Valley",
+    resolution: "6000 × 4000 px",
+    size: "12.4 MB",
+    camera: "Canon EOS R5",
+    lens: "RF 24-70mm f/2.8L IS USM",
+    settings: {
+      aperture: "f/8.0",
+      shutterSpeed: "1/125",
+      iso: "400",
+      focalLength: "35mm",
+    },
+    location: "Dolomites, Italy",
+    date: "October 12, 2025 - 6:42 AM",
+    coordinates: "46.4102° N, 11.8440° E",
+  },
+  {
+    id: "2",
+    url: "https://images.unsplash.com/photo-1544124094-8aea0374da93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3J0cmFpdCUyMHBob3RvZ3JhcGh5fGVufDF8fHx8MTc2MTQ1NTU1Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Golden Hour Portrait",
+    resolution: "4500 × 6000 px",
+    size: "8.7 MB",
+    camera: "Sony A7 IV",
+    lens: "FE 85mm f/1.4 GM",
+    settings: {
+      aperture: "f/1.8",
+      shutterSpeed: "1/500",
+      iso: "200",
+      focalLength: "85mm",
+    },
+    location: "Brooklyn, New York",
+    date: "September 28, 2025 - 7:15 PM",
+    coordinates: "40.6782° N, 73.9442° W",
+  },
+  {
+    id: "3",
+    url: "https://images.unsplash.com/photo-1622746908635-b825a84939e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmUlMjBwaG90b2dyYXBoeXxlbnwxfHx8fDE3NjE0MTY5ODl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Modern Architecture",
+    resolution: "5472 × 3648 px",
+    size: "15.2 MB",
+    camera: "Nikon Z7 II",
+    lens: "NIKKOR Z 14-30mm f/4 S",
+    settings: {
+      aperture: "f/11",
+      shutterSpeed: "1/250",
+      iso: "100",
+      focalLength: "14mm",
+    },
+    location: "Dubai, UAE",
+    date: "August 5, 2025 - 2:30 PM",
+    coordinates: "25.2048° N, 55.2708° E",
+  },
+  {
+    id: "4",
+    url: "https://images.unsplash.com/photo-1651673153662-86d3fde39c9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYXR1cmUlMjB3aWxkbGlmZXxlbnwxfHx8fDE3NjE0MDk4MTB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Wildlife in Natural Habitat",
+    resolution: "7200 × 4800 px",
+    size: "18.9 MB",
+    camera: "Canon EOS-1D X Mark III",
+    lens: "EF 400mm f/2.8L IS III USM",
+    settings: {
+      aperture: "f/4.0",
+      shutterSpeed: "1/2000",
+      iso: "800",
+      focalLength: "400mm",
+    },
+    location: "Serengeti National Park, Tanzania",
+    date: "July 19, 2025 - 5:55 AM",
+    coordinates: "2.3333° S, 34.8333° E",
+  },
+  {
+    id: "5",
+    url: "https://images.unsplash.com/photo-1665440969788-11e5a2f37ead?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1cmJhbiUyMGNpdHlzY2FwZXxlbnwxfHx8fDE3NjE0Nzc4NDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Urban Cityscape",
+    resolution: "6240 × 4160 px",
+    size: "14.5 MB",
+    camera: "Fujifilm X-T5",
+    lens: "XF 16-55mm f/2.8 R LM WR",
+    settings: {
+      aperture: "f/5.6",
+      shutterSpeed: "1/320",
+      iso: "160",
+      focalLength: "23mm",
+    },
+    location: "Tokyo, Japan",
+    date: "October 3, 2025 - 8:20 PM",
+    coordinates: "35.6762° N, 139.6503° E",
+  },
+  {
+    id: "6",
+    url: "https://images.unsplash.com/photo-1615184697985-c9bde1b07da7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGFydHxlbnwxfHx8fDE3NjE1MDI5ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Abstract Composition",
+    resolution: "4000 × 6000 px",
+    size: "9.8 MB",
+    camera: "Sony A7R V",
+    lens: "FE 90mm f/2.8 Macro G OSS",
+    settings: {
+      aperture: "f/2.8",
+      shutterSpeed: "1/160",
+      iso: "320",
+      focalLength: "90mm",
+    },
+    location: "Studio, Los Angeles",
+    date: "September 15, 2025 - 11:30 AM",
+    coordinates: "34.0522° N, 118.2437° W",
+  },
+  {
+    id: "7",
+    url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvY2VhbiUyMGJlYWNofGVufDF8fHx8MTc2MTQzOTQyMXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Tropical Paradise",
+    resolution: "5760 × 3840 px",
+    size: "11.2 MB",
+    camera: "Canon EOS R6 Mark II",
+    lens: "RF 15-35mm f/2.8L IS USM",
+    settings: {
+      aperture: "f/9.0",
+      shutterSpeed: "1/200",
+      iso: "100",
+      focalLength: "20mm",
+    },
+    location: "Maldives",
+    date: "August 22, 2025 - 3:45 PM",
+    coordinates: "3.2028° N, 73.2207° E",
+  },
+  {
+    id: "8",
+    url: "https://images.unsplash.com/photo-1552082919-e60010758c47?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3VudGFpbiUyMHBlYWtzfGVufDF8fHx8MTc2MTUyMjY0MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Alpine Summit",
+    resolution: "6720 × 4480 px",
+    size: "16.7 MB",
+    camera: "Nikon Z9",
+    lens: "NIKKOR Z 24-120mm f/4 S",
+    settings: {
+      aperture: "f/10",
+      shutterSpeed: "1/400",
+      iso: "200",
+      focalLength: "24mm",
+    },
+    location: "Swiss Alps, Switzerland",
+    date: "June 30, 2025 - 7:10 AM",
+    coordinates: "46.5197° N, 8.6352° E",
+  },
+  {
+    id: "9",
+    url: "https://images.unsplash.com/photo-1628803184377-c5167a0cb6fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHJlZXQlMjBwaG90b2dyYXBoeXxlbnwxfHx8fDE3NjE1MjI5NDh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Street Life",
+    resolution: "4800 × 3200 px",
+    size: "7.9 MB",
+    camera: "Leica Q3",
+    lens: "Summilux 28mm f/1.7 ASPH",
+    settings: {
+      aperture: "f/2.8",
+      shutterSpeed: "1/640",
+      iso: "400",
+      focalLength: "28mm",
+    },
+    location: "Paris, France",
+    date: "October 8, 2025 - 4:25 PM",
+    coordinates: "48.8566° N, 2.3522° E",
+  },
+  {
+    id: "10",
+    url: "https://images.unsplash.com/photo-1532980400857-e8d9d275d858?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb29kJTIwcGhvdG9ncmFwaHl8ZW58MXx8fHwxNzYxNDg1NjkzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Culinary Art",
+    resolution: "5184 × 3456 px",
+    size: "10.3 MB",
+    camera: "Sony A7 IV",
+    lens: "FE 50mm f/1.2 GM",
+    settings: {
+      aperture: "f/2.0",
+      shutterSpeed: "1/100",
+      iso: "250",
+      focalLength: "50mm",
+    },
+    location: "Studio, San Francisco",
+    date: "September 20, 2025 - 1:15 PM",
+    coordinates: "37.7749° N, 122.4194° W",
+  },
+  {
+    id: "11",
+    url: "https://images.unsplash.com/photo-1502957291543-d85480254bf8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuaWdodCUyMHNreSUyMHN0YXJzfGVufDF8fHx8MTc2MTQ3NjYyOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Starry Night",
+    resolution: "6000 × 4000 px",
+    size: "13.8 MB",
+    camera: "Canon EOS Ra",
+    lens: "RF 14mm f/2.8L USM",
+    settings: {
+      aperture: "f/2.8",
+      shutterSpeed: "20s",
+      iso: "3200",
+      focalLength: "14mm",
+    },
+    location: "Death Valley, California",
+    date: "July 2, 2025 - 11:50 PM",
+    coordinates: "36.5323° N, 116.9325° W",
+  },
+  {
+    id: "12",
+    url: "https://images.unsplash.com/photo-1532614208657-10b8d7815f40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmbG93ZXIlMjBtYWNyb3xlbnwxfHx8fDE3NjE1MjI5NDl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Botanical Detail",
+    resolution: "4928 × 3264 px",
+    size: "8.1 MB",
+    camera: "Olympus OM-1",
+    lens: "M.Zuiko 60mm f/2.8 Macro",
+    settings: {
+      aperture: "f/4.0",
+      shutterSpeed: "1/250",
+      iso: "200",
+      focalLength: "60mm",
+    },
+    location: "Botanical Garden, Singapore",
+    date: "August 14, 2025 - 9:30 AM",
+    coordinates: "1.3521° N, 103.8198° E",
+  },
+];
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen bg-black text-amber-50 p-8">
-      <Link to="/" className="text-green-400 hover:underline">
-        ← Back
-      </Link>
-      <h1 className="text-4xl font-bold mt-8 text-green-400">Portfolio</h1>
-      <p className="mt-4 text-white/70">Your photography portfolio goes here.</p>
+    <div className="min-h-screen bg-black p-2">
+      <NavigationBar />
+      <div className="max-w-[1600px] mx-auto mt-8">
+        <PhotoGallery photos={mockPhotos} />
+      </div>
     </div>
   );
 }
